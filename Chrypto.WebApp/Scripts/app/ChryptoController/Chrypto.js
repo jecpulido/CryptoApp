@@ -56,7 +56,6 @@
     //Actualiza la tabla cada 10 segundos
     UpdateTable = function () {
         $interval(function () {
-            console.log("Entree");
             getDataCrypto();
         }, 10000);
     };
