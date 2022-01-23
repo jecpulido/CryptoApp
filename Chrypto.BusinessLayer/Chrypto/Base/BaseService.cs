@@ -9,7 +9,6 @@ namespace Chrypto.BusinessLayer.Chrypto.Base
     {
         protected string _endpoint;
 
-        //protected readonly static WebClient _httpClient = new WebClient();
 
         protected static HttpClient httpClient;
 
@@ -17,17 +16,6 @@ namespace Chrypto.BusinessLayer.Chrypto.Base
         {
             _endpoint = endpoint;
         }
-
-        //public T Get<T>()
-        //{
-        //    _httpClient.UseDefaultCredentials = true;
-        //    _httpClient.Headers.Add("X-CMC_PRO_API_KEY", Parameters.API_KEY);
-        //    _httpClient.Headers.Add("Accepts", "application/json");
-        //    var response = _httpClient.DownloadString(_endpoint);
-        //    _httpClient.Dispose();
-        //    return JsonConvert.DeserializeObject<T>(response);
-        //}
-
 
         public T Get<T>(out HttpStatusCode statusCode)
         {
