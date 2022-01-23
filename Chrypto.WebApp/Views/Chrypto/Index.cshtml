@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Lista criptomonedas";
+}
+<h1>
+    Ultimas Criptomonedas
+</h1>
+<hr />
+<div ng-controller="ChryptoController">
+    <div class="row container">
+
+
+        <div class="col">
+            <div ng-repeat="e in record" ng-class-even="'even'" ng-class-odd="'odd'" class="card p-2 mb-1 bg-body text-dark" style="width: 35rem;">
+                <div class="card-header">
+                    <strong>{{e.Name}}</strong> - {{e.Symbol}}
+                    <span class="float-end"> {{e.Quote.Usd.Price | currency:"USD$"}} </span>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote-footer">
+
+                        <strong>Rank CMC:</strong> {{ e.CmcRank }}<br />
+                        <strong>Fecha Agregada: </strong> {{ e.DateAdded | date:'dd/MM/yyyy'}}<br />
+                        <strong>Fecha Actualización:</strong> {{e.LastUpdated | date:"MM/dd/yyyy 'at' h:mma"}}
+
+                        <button class="btn btn-warning float-end" ng-click="selectCurrency(e)"> Conversión</button>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="col" id="divExchange" ng-if="!enable">
+
+            <div class="row g-3 align-items-center">
+                <h3> {{ symbol }} </h3>
+                <div class="col-auto">
+                    <label for="AmountExchange" class="col-form-label">Cantidad</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="AmountExchange" ng-model="amount" class="form-control">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-warning" id="btnUpdate" name="btnUpdate" ng-click="updateCurrency(amount)"> Actualizar</button>
+                    <span id="passwordHelpInline" class="form-text">
+
+                    </span>
+                </div>
+            </div>
+            <br />
+            <loading></loading>
+            <table class="table mb-1 bg-body text-dark" ng-if="!loading">
+                <thead>
+                    <tr>
+                        <th scope="col">Crypto</th>
+                        <th scope="col">Conversión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="crypto in exchanges" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <th scope="row">{{ crypto.Symbol }}</th>
+                        <td> {{ crypto.Price | number}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/app/ChryptoController/Chrypto.js")
+}
